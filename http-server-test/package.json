@@ -1,5 +1,6 @@
 {
   "name": "http-server-test",
+  "version": "1.0.0",
   "module": "index.ts",
   "type": "module",
   "scripts": {
