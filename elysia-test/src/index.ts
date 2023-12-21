@@ -1,6 +1,7 @@
 import { Elysia, t } from 'elysia';
 import { html } from '@elysiajs/html';
 import { swagger } from '@elysiajs/swagger';
+import { apollo, gql } from '@elysiajs/apollo';
 
 const app = new Elysia()
   .use(html())
@@ -11,6 +12,32 @@ const app = new Elysia()
         info: {
           title: 'Elysia Documentation',
           version: '1.0.0',
+        },
+      },
+    }),
+  )
+  .use(
+    apollo({
+      typeDefs: gql`
+        type Book {
+          title: String
+          author: String
+        }
+
+        type Query {
+          books: [Book]
+        }
+      `,
+      resolvers: {
+        Query: {
+          books: () => {
+            return [
+              {
+                title: 'Elysia',
+                author: 'saltyAom',
+              },
+            ];
+          },
         },
       },
     }),
